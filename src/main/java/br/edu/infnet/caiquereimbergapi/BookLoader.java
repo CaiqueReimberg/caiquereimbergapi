@@ -35,15 +35,16 @@ public class BookLoader implements ApplicationRunner {
 
         while (line != null) {
             fields = line.split(";");
-            // The Shining;Stephen King;Doubleday;Horror;79.90;true
 
+            // The Shining;Stephen King;Doubleday;Horror;79.90;true
             Book book = new Book();
             book.setTitle(fields[0]);
             book.setAuthor(fields[1]);
             book.setPublisher(fields[2]);
             book.setCategory(fields[3]);
             book.setPrice(new BigDecimal(fields[4]));
-
+            book.setLanguage(fields[6]);
+            book.setEdition(Integer.parseInt(fields[7]));
 
             bookService.create(book);
 

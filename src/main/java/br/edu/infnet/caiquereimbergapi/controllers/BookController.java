@@ -17,13 +17,31 @@ public class BookController {
 
     @PostMapping
     public Book add(@RequestBody Book book) {
-        Book includedBook = bookService.create(book);
+        return bookService.create(book);
+    }
 
-        return includedBook;
+    @PutMapping("/{id}")
+    public Book update(@PathVariable Integer id, @RequestBody Book book) {
+        return bookService.update(id, book);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        bookService.delete(id);
+    }
+
+    @PatchMapping("/{id}/disable")
+    public Book disable(@PathVariable Integer id) {
+        return bookService.disable(id);
     }
 
     @GetMapping
     public List<Book> getBooks() {
         return bookService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Book getBook(@PathVariable Integer id) {
+        return bookService.findById(id);
     }
 }
