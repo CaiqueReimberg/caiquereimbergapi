@@ -51,6 +51,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"O Iluminado\",\r\n    \"author\": \"Stephen King\",\r\n    \"publisher\": \"Intrinseca\",\r\n    \"category\": \"Terror\",\r\n    \"price\": 79.90,\r\n    \"active\": true,\r\n    \"language\": \"Português\",\r\n    \"edition\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/books/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
