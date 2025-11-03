@@ -1,7 +1,7 @@
 package br.edu.infnet.caiquereimbergapi.controllers;
 
 import br.edu.infnet.caiquereimbergapi.model.domain.Comic;
-import br.edu.infnet.caiquereimbergapi.model.domain.service.ComicService;
+import br.edu.infnet.caiquereimbergapi.model.service.ComicService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,4 +44,10 @@ public class ComicController {
     public Comic getComic(@PathVariable Integer id) {
         return comicService.findById(id);
     }
+
+    @GetMapping("/universeAndPrice/{universe}/{price}")
+    public List<Comic> getComicByUniverseAndPrice(@PathVariable String universe, @PathVariable Double price) {
+        return comicService.findComicsByUniverseAndByPrice(universe, price);
+    }
+
 }

@@ -33,7 +33,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"id\": 1,\r\n        \"title\": \"Ponto de Impacto\",\r\n        \"author\": \"Dan Brown\",\r\n        \"publisher\": \"Arqueiro\",\r\n        \"category\": \"Suspense\",\r\n        \"price\": 59.90,\r\n        \"active\": true\r\n    }",
+							"raw": "{\r\n    \"title\": \"Ponto de Impacto\",\r\n    \"author\": \"Dan Brown\",\r\n    \"publisher\": \"Arqueiro\",\r\n    \"category\": \"Suspense\",\r\n    \"price\": 59.90,\r\n    \"active\": true,\r\n    \"language\": \"Português\",\r\n    \"edition\": 1,\r\n    \"store\": \"12345678000190\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,6 +74,437 @@
 							"path": [
 								"books",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/books/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/books/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disable",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/books/1/disable",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"books",
+								"1",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "byPrice",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Ponto de Impacto\",\r\n    \"author\": \"Dan Brown\",\r\n    \"publisher\": \"Arqueiro\",\r\n    \"category\": \"Suspense\",\r\n    \"price\": 59.90,\r\n    \"active\": true,\r\n    \"language\": \"Português\",\r\n    \"edition\": 1,\r\n    \"store\": \"12345678000190\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/books/byPrice/80",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"books",
+								"byPrice",
+								"80"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comics",
+			"item": [
+				{
+					"name": "comics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/comics",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"comics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 1,\r\n        \"title\": \"Ponto de Impacto\",\r\n        \"author\": \"Dan Brown\",\r\n        \"publisher\": \"Arqueiro\",\r\n        \"category\": \"Suspense\",\r\n        \"price\": 59.90,\r\n        \"active\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/comics",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"comics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Batman: Silêncio\",\r\n    \"author\": \"Jeph Loeb\",\r\n    \"publisher\": \"DC Comics\",\r\n    \"category\": \"Super-herói\",\r\n    \"price\": 53.90,\r\n    \"active\": true,\r\n    \"illustrator\": \"Jim Lee\",\r\n    \"issueNumber\": 54,\r\n    \"universe\": \"DC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/comics/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"comics",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/comics/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"comics",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/comics/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"comics",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disable",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/comics/1/disable",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"comics",
+								"1",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "stores",
+			"item": [
+				{
+					"name": "stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/stores",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Livraria TESTE\",\r\n        \"email\": \"contato@livrariateste.com.br\",\r\n        \"phone\": \"11999999\",\r\n        \"address\": null,\r\n        \"active\": true,\r\n        \"cnpj\": \"33335678000190\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/stores",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Livraria TESTE\",\r\n        \"email\": \"contato@livrariateste.com.br\",\r\n        \"phone\": \"11999999\",\r\n        \"address\": null,\r\n        \"active\": true,\r\n        \"cnpj\": \"33335678000190\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/stores/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"stores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/stores/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"stores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/stores/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"stores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disable",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/stores/1/disable",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"stores",
+								"1",
+								"disable"
 							]
 						}
 					},

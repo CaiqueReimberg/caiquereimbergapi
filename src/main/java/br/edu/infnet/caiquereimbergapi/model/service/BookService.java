@@ -1,34 +1,39 @@
-package br.edu.infnet.caiquereimbergapi.model.domain.service;
+package br.edu.infnet.caiquereimbergapi.model.service;
 
 import br.edu.infnet.caiquereimbergapi.exceptions.NotFoundBookException;
 import br.edu.infnet.caiquereimbergapi.interfaces.CrudService;
 import br.edu.infnet.caiquereimbergapi.model.domain.Book;
+import br.edu.infnet.caiquereimbergapi.model.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class BookService implements CrudService<Book, Integer> {
 
-    private final Map<Integer, Book> books = new ConcurrentHashMap<>();
-    private final AtomicInteger nextId = new AtomicInteger(1);
+    private final BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    public List<Book> findBooksByPrice(Double price) {
+        return bookRepository.findByPriceGreaterThanOrderByPriceAsc(price);
+    }
+
+    public List<Book> findBooksByActive() {
+        return bookRepository.findAllByActive(true);
+    }
 
     @Override
     public Book create(Book book) {
         if (book == null) {
             throw new IllegalArgumentException("Book cannot be null");
         }
-        book.setId(nextId.getAndIncrement());
 
-        books.put(book.getId(), book);
-        return book;
+        return bookRepository.save(book);
     }
 
-    // TODO olhar com calma esse validate
     public void validate(Book book) {
         if (book.getId() != null && book.getId() > 0) {
             throw new IllegalArgumentException("ID cannot already exist");
@@ -39,21 +44,20 @@ public class BookService implements CrudService<Book, Integer> {
     public Book update(Integer id, Book book) {
         validate(book);
         book.setId(id);
-        books.put(book.getId(), book);
 
-        return book;
+        return bookRepository.save(book);
     }
 
     @Override
     public void delete(Integer id) {
-        findById(id);
+        Book book = findById(id);
 
-        books.remove(id);
+        bookRepository.delete(book);
     }
 
     @Override
     public List<Book> getAll() {
-        return new ArrayList<>(books.values());
+        return bookRepository.findAll();
     }
 
     @Override
@@ -62,13 +66,7 @@ public class BookService implements CrudService<Book, Integer> {
             throw new IllegalArgumentException("Id cannot be null");
         }
 
-        Book book = books.get(id);
-
-        if (book == null) {
-            throw new NotFoundBookException("Book not found");
-        }
-        
-        return book;
+        return bookRepository.findById(id).orElseThrow(() -> new NotFoundBookException("Book with id [" + id + "] not found"));
     }
 
     @Override
@@ -77,6 +75,6 @@ public class BookService implements CrudService<Book, Integer> {
 
         book.setActive(false);
 
-        return book;
+        return bookRepository.save(book);
     }
 }

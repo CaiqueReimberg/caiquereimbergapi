@@ -1,9 +1,26 @@
 package br.edu.infnet.caiquereimbergapi.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+@Entity
 public class Comic extends Publication {
     private String illustrator;
     private int issueNumber;
     private String universe;
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id", nullable = false)
+    @JsonBackReference
+    private Store store;
 
     @Override
     public String toString() {

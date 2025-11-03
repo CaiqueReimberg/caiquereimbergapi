@@ -1,34 +1,36 @@
-package br.edu.infnet.caiquereimbergapi.model.domain.service;
+package br.edu.infnet.caiquereimbergapi.model.service;
 
-import br.edu.infnet.caiquereimbergapi.exceptions.NotFoundBookException;
+import br.edu.infnet.caiquereimbergapi.exceptions.NotFoundComicException;
 import br.edu.infnet.caiquereimbergapi.interfaces.CrudService;
+import br.edu.infnet.caiquereimbergapi.model.domain.Book;
 import br.edu.infnet.caiquereimbergapi.model.domain.Comic;
+import br.edu.infnet.caiquereimbergapi.model.repository.ComicRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ComicService implements CrudService<Comic, Integer> {
+    private final ComicRepository comicRepository;
 
-    private final Map<Integer, Comic> comics = new ConcurrentHashMap<>();
-    private final AtomicInteger nextId = new AtomicInteger(1);
+    public ComicService(ComicRepository comicRepository) {
+        this.comicRepository = comicRepository;
+    }
+
+    public List<Comic> findComicsByUniverseAndByPrice(String universe, Double price) {
+        return comicRepository.findByUniverseAndPriceGreaterThanOrderByPriceAsc(universe, price);
+    }
 
     @Override
     public Comic create(Comic comic) {
         if (comic == null) {
             throw new IllegalArgumentException("Comic cannot be null");
         }
-        comic.setId(nextId.getAndIncrement());
 
-        comics.put(comic.getId(), comic);
-        return comic;
+        return comicRepository.save(comic);
     }
 
-    // TODO olhar com calma esse validate
     public void validate(Comic comic) {
         if (comic.getId() != null && comic.getId() > 0) {
             throw new IllegalArgumentException("ID cannot already exist");
@@ -39,21 +41,20 @@ public class ComicService implements CrudService<Comic, Integer> {
     public Comic update(Integer id, Comic comic) {
         validate(comic);
         comic.setId(id);
-        comics.put(comic.getId(), comic);
 
-        return comic;
+        return comicRepository.save(comic);
     }
 
     @Override
     public void delete(Integer id) {
-        findById(id);
+        Comic comic = findById(id);
 
-        comics.remove(id);
+        comicRepository.delete(comic);
     }
 
     @Override
     public List<Comic> getAll() {
-        return new ArrayList<>(comics.values());
+        return comicRepository.findAll();
     }
 
     @Override
@@ -62,13 +63,7 @@ public class ComicService implements CrudService<Comic, Integer> {
             throw new IllegalArgumentException("Id cannot be null");
         }
 
-        Comic comic = comics.get(id);
-
-        if (comic == null) {
-            throw new NotFoundBookException("Comic not found");
-        }
-        
-        return comic;
+        return comicRepository.findById(id).orElseThrow(() -> new NotFoundComicException("Comic with id [" + id + "] not found"));
     }
 
     @Override
@@ -77,6 +72,6 @@ public class ComicService implements CrudService<Comic, Integer> {
 
         comic.setActive(false);
 
-        return comic;
+        return comicRepository.save(comic);
     }
 }
